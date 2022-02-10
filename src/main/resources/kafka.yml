@@ -1,0 +1,17 @@
+bootstrapServers: localhost:9092
+errorTopic: requestprocessingservice_error
+replyOnError: true
+producers:
+  requestservice:
+    groupTopic: requestservice_group
+    specificTopic: requestservice_specific
+groupConsumer:
+  concurrency: 1
+  groupId: requestprocessingservice
+  pollTimeOut: 3000
+  topic: requestprocessingservice_gpoup
+specificConsumer:
+  concurrency: 1
+  groupId: requestprocessingservice
+  pollTimeOut: 3000
+  topic: requestprocessingservice_specific

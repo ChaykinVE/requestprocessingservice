@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import common.KafkaHelper;
 import dto.requestservice.CreateRequestDto;
+import dto.requestservice.DeleteRequestDto;
+import dto.requestservice.GetRequestDto;
+import dto.requestservice.UpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +28,27 @@ public class WebController {
     public Mono<String> processCreateRequest(@RequestBody String request) {
         CreateRequestDto requestDto = readMessage(request, CreateRequestDto.class);
         return Mono.fromFuture(requestProcessingService.createRequest(requestDto))
+                .map(KafkaHelper::toJsonString);
+    }
+
+    @PostMapping("/getrequest")
+    public Mono<String> processGetRequest(@RequestBody String request) {
+        GetRequestDto requestDto = readMessage(request, GetRequestDto.class);
+        return Mono.fromFuture(requestProcessingService.getRequest(requestDto))
+                .map(KafkaHelper::toJsonString);
+    }
+
+    @PostMapping("/updaterequest")
+    public Mono<String> processUpdateRequest(@RequestBody String request) {
+        UpdateRequestDto requestDto = readMessage(request, UpdateRequestDto.class);
+        return Mono.fromFuture(requestProcessingService.updateRequest(requestDto))
+                .map(KafkaHelper::toJsonString);
+    }
+
+    @PostMapping("/deleterequest")
+    public Mono<String> processDeleteRequest(@RequestBody String request) {
+        DeleteRequestDto requestDto = readMessage(request, DeleteRequestDto.class);
+        return Mono.fromFuture(requestProcessingService.deleteRequest(requestDto))
                 .map(KafkaHelper::toJsonString);
     }
 

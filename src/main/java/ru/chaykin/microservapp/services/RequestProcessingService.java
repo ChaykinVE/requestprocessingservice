@@ -1,7 +1,6 @@
 package ru.chaykin.microservapp.services;
 
-import dto.requestservice.CreateRequestDto;
-import dto.requestservice.CreateRequestResponseDto;
+import dto.requestservice.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +17,18 @@ public class RequestProcessingService {
                 .thenCompose(requestService::createRequest);
     }
 
+    public CompletableFuture<GetRequestResponseDto> getRequest(GetRequestDto requestDto) {
+        return CompletableFuture.completedFuture(requestDto)
+                .thenCompose(requestService::getRequest);
+    }
+
+    public CompletableFuture<UpdateRequestResponseDto> updateRequest(UpdateRequestDto requestDto) {
+        return CompletableFuture.completedFuture(requestDto)
+                .thenCompose(requestService::updateRequest);
+    }
+
+    public CompletableFuture<DeleteRequestResponseDto> deleteRequest(DeleteRequestDto requestDto) {
+        return CompletableFuture.completedFuture(requestDto)
+                .thenCompose(requestService::deleteRequest);
+    }
 }

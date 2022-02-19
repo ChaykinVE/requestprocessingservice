@@ -3,3 +3,32 @@ server:
 service:
   name: requestprocessingservice
   version: 1.0
+ibm:
+  mq:
+    enableMqContainer: true
+    queue-manager: QM1
+    channel: DEV.APP.SVRCONN
+    connName: localhost(1414)
+    user: app
+    password: password
+#    use-i-b-m-cipher-mappings: false
+#    user-authentication-m-q-c-s-p: false
+#    ssl.enabled: false
+    commonConfig:
+      concurrency: 2
+      createRequest:
+        enable: true
+        inQueue: DEV.RQ.CRTRQST
+        outQueue: DEV.RS.CRTRQST
+      getRequest:
+        enable: true
+        inQueue: DEV.RQ.GTRQST
+        outQueue: DEV.RS.GTRQST
+      updateRequest:
+        enable: true
+        inQueue: DEV.RQ.UPDRQST
+        outQueue: DEV.RS.UPDRQST
+      deleteRequest:
+        enable: true
+        inQueue: DEV.RQ.DLTRQST
+        outQueue: DEV.RS.DLTRQST
